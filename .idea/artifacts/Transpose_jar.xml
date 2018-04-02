@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Transpose:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Transpose_jar</output-path>
+    <root id="archive" name="Transpose.jar">
+      <element id="module-output" name="Transpose" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/args4j-2.33.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
