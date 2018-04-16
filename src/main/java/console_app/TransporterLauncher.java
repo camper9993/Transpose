@@ -1,5 +1,6 @@
 package console_app;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 
 import org.kohsuke.args4j.Argument;

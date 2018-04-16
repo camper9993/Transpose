@@ -2,12 +2,12 @@ package console_app;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Objects;
+import java.util.TreeMap;
 
 class Transporter {
 
-    private LinkedHashMap<Integer, ArrayList<String>> text = new LinkedHashMap<>();
+    private TreeMap<Integer, ArrayList<String>> text = new TreeMap<>();
     private ArrayList<String> transposeText = new ArrayList<>();
     private int maxWordsInLine = 0;
     private int maxWordLength = 0;
@@ -17,8 +17,7 @@ class Transporter {
             BufferedReader br = new BufferedReader(new FileReader(file));
             createMap(br);
             br.close();
-        }
-        else {
+        } else {
             System.out.println("Введите текст: ");
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             createMap(br);
@@ -40,7 +39,7 @@ class Transporter {
                     maxWordLength = part.length();
                 list.add(part);
             }
-            text.put(i,list);
+            text.put(i, list);
             i++;
         }
     }
@@ -84,7 +83,7 @@ class Transporter {
                     transposeText.set(i, " " + transposeText.get(i));
                 }
                 if (!transposeText.get(i + 1).equals("\n"))
-                    transposeText.set(i,transposeText.get(i) + " ");
+                    transposeText.set(i, transposeText.get(i) + " ");
             }
         }
     }
@@ -93,7 +92,7 @@ class Transporter {
     String convert() {
         StringBuilder result = new StringBuilder();
         for (String s : transposeText) {
-                result.append(s);
+            result.append(s);
         }
         return result.toString();
     }
@@ -102,14 +101,10 @@ class Transporter {
     void writeTo(String ofile) throws IOException {
         if (!ofile.equals("")) {
             BufferedWriter writer = new BufferedWriter(new FileWriter(ofile));
-            writer.write(this.convert());
+            writer.write(convert());
             writer.close();
-            System.out.println(this.convert());
-        }
-        else
-            System.out.println(this.convert());
-
+            System.out.println(convert());
+        } else
+            System.out.println(convert());
     }
-
-
 }
