@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.TreeMap;
 
+import static java.lang.StrictMath.abs;
+
 class Transporter {
 
     private TreeMap<Integer, ArrayList<String>> text = new TreeMap<>();
@@ -13,16 +15,15 @@ class Transporter {
     private int maxWordLength = 0;
 
     Transporter(String file) throws IOException {
-        if (!file.equals("")) {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            createMap(br);
-            br.close();
-        } else {
-            System.out.println("Введите текст: ");
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            createMap(br);
-            br.close();
-        }
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        createMap(br);
+        br.close();
+    }
+    Transporter() throws IOException{
+        System.out.println("Введите текст: ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        createMap(br);
+        br.close();
     }
 
     private void createMap(BufferedReader reader) throws IOException {
@@ -67,23 +68,31 @@ class Transporter {
     }
 
     void leftSide(int length) {
+        int k;
         for (int i = 0; i < transposeText.size() - 1; i++) {
-            if (!transposeText.get(i).equals("\n") && !transposeText.get(i + 1).equals("\n")) {
-                while (transposeText.get(i).length() <= length) {
-                    transposeText.set(i, transposeText.get(i) + " ");
+            if (!transposeText.get(i).equals("\n") && !transposeText.get(i + 1).equals("\n") && transposeText.get(i).length() <= length) {
+                StringBuilder sb = new StringBuilder();
+                k = abs(transposeText.get(i).length() - length);
+                while (k >= -1) {
+                    sb.append(" ");
+                    k--;
                 }
+                transposeText.set(i,transposeText.get(i) + sb.toString());
             }
         }
     }
 
     void rightSide(int lenght) {
+        int k;
         for (int i = 0; i < transposeText.size() - 1; i++) {
             if (!transposeText.get(i).equals("\n")) {
-                while (transposeText.get(i).length() < lenght) {
-                    transposeText.set(i, " " + transposeText.get(i));
+                StringBuilder sb = new StringBuilder();
+                k = abs(transposeText.get(i).length() - lenght);
+                while (k >= 0) {
+                    sb.append(" ");
+                    k--;
                 }
-                if (!transposeText.get(i + 1).equals("\n"))
-                    transposeText.set(i, transposeText.get(i) + " ");
+                transposeText.set(i,sb.toString() + transposeText.get(i));
             }
         }
     }
@@ -98,13 +107,13 @@ class Transporter {
     }
 
 
-    void writeTo(String ofile) throws IOException {
-        if (!ofile.equals("")) {
+    void writeToFile(String ofile) throws IOException {
             BufferedWriter writer = new BufferedWriter(new FileWriter(ofile));
             writer.write(convert());
             writer.close();
-            System.out.println(convert());
-        } else
-            System.out.println(convert());
+        }
+
+    void writeToConsole() {
+        System.out.println(convert());
     }
 }

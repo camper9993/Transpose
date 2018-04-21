@@ -40,9 +40,12 @@ public class TransporterLauncher {
             e.printStackTrace();
             return;
         }
-        Transporter f;
 
+        Transporter f;
+        if (!inputFileName.equals(""))
             f = new Transporter(inputFileName);
+        else
+            f = new Transporter();
 
         f.transpose();
 
@@ -60,6 +63,9 @@ public class TransporterLauncher {
         } else
             f.leftSide(length);
 
-        f.writeTo(outputFileName);
+        if (!outputFileName.equals(""))
+            f.writeToFile(outputFileName);
+        else
+            f.writeToConsole();
     }
 }

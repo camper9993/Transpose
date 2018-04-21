@@ -1,10 +1,10 @@
 package console_app;
 
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class TransporterTest {
     @org.junit.jupiter.api.Test
