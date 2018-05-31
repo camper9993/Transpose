@@ -20,7 +20,6 @@ class Transporter {
         br.close();
     }
     Transporter() throws IOException{
-        System.out.println("Введите текст: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         createMap(br);
         br.close();
@@ -68,31 +67,24 @@ class Transporter {
     }
 
     void leftSide(int length) {
-        int k;
         for (int i = 0; i < transposeText.size() - 1; i++) {
-            if (!transposeText.get(i).equals("\n") && !transposeText.get(i + 1).equals("\n") && transposeText.get(i).length() <= length) {
-                StringBuilder sb = new StringBuilder();
-                k = abs(transposeText.get(i).length() - length);
-                while (k >= -1) {
-                    sb.append(" ");
-                    k--;
+            if (!transposeText.get(i).equals("\n") && !transposeText.get(i + 1).equals("\n")) {
+                while (transposeText.get(i).length() <= length) {
+                    transposeText.set(i, transposeText.get(i) + " ");
                 }
-                transposeText.set(i,transposeText.get(i) + sb.toString());
             }
         }
     }
 
+
     void rightSide(int lenght) {
-        int k;
         for (int i = 0; i < transposeText.size() - 1; i++) {
             if (!transposeText.get(i).equals("\n")) {
-                StringBuilder sb = new StringBuilder();
-                k = abs(transposeText.get(i).length() - lenght);
-                while (k >= 0) {
-                    sb.append(" ");
-                    k--;
+                while (transposeText.get(i).length() < lenght) {
+                    transposeText.set(i, " " + transposeText.get(i));
                 }
-                transposeText.set(i,sb.toString() + transposeText.get(i));
+                if (!transposeText.get(i + 1).equals("\n"))
+                    transposeText.set(i,transposeText.get(i) + " ");
             }
         }
     }
